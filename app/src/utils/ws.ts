@@ -1,5 +1,4 @@
 import {queryClient} from "../main.tsx";
-import type {ITransaction} from "../types.ts";
 
 export default class WSHandler {
 	constructor() {

@@ -1,4 +1,4 @@
-import React, {FormEvent, FormHTMLAttributes, memo, useCallback} from "react";
+import {type FormEvent, type FormHTMLAttributes, memo, useCallback} from "react";
 import classNames from "classnames";
 import "./style.css";
 
