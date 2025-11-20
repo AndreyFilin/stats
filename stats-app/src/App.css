@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'fontello';
+    src: url('./assets/fonts/fontello/fontello.eot?25423741');
+    src: url('./assets/fonts/fontello/fontello.eot?25423741#iefix') format('embedded-opentype'),
+    url('./assets/fonts/fontello/fontello.woff2?25423741') format('woff2'),
+    url('./assets/fonts/fontello/fontello.woff?25423741') format('woff'),
+    url('./assets/fonts/fontello/fontello.ttf?25423741') format('truetype'),
+    url('./assets/fonts/fontello/fontello.svg?25423741#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.app__layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+
+
+/**/
+
+.entities {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.entity {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+}
