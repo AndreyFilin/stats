@@ -1,11 +1,12 @@
 import {createContext, lazy, Suspense, useState} from "react";
 import {Route, Routes} from "react-router-dom";
-import "./App.css";
 import {PageLoader} from "./components/Page";
 import Header from "./components/Header";
 import "./utils/db.ts";
 import "./utils/ws.ts";
 import AuthorizationPage from "./pages/AuthorizationPage";
+import "./App.css";
+
 const BudgetPage = lazy(() => import(`./pages/BudgetPage`));
 const CalendarPage = lazy(() => import(`./pages/CalendarPage`));
 const StatisticsPage = lazy(() => import(`./pages/StatisticsPage`));
@@ -27,9 +28,7 @@ function App() {
 	return (
 		<AppContext.Provider value={{token, setToken}}>
 			<div className={`app__layout`}>
-				{!token && (
-					<AuthorizationPage />
-				)}
+				{!token && <AuthorizationPage />}
 
 				{!!token && (
 					<>
