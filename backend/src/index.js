@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
-import { WebSocketServer } from "ws";
+import { WebSocketServer, WebSocket } from "ws";
 
-const hostname = `127.0.0.1`;
+const hostname = process.env.HOST || `127.0.0.1`;
 const port = process.env.PORT || 3000;
 
 import Index from "./api/get/Index.js";
@@ -16,19 +16,19 @@ import EventRemove from "./api/delete/Event.js";
 
 const routes = {
     GET: {
-        '/': Index,
-        '/profile': Profile,
-        '/transactions': TransactionsList,
-        '/events': EventsList,
+        '/api/': Index,
+        '/api/profile': Profile,
+        '/api/transactions': TransactionsList,
+        '/api/events': EventsList,
     },
     POST: {
-        '/transactions': TransactionCreate,
-        '/events': EventCreate,
-        '/login': Login,
+        '/api/transactions': TransactionCreate,
+        '/api/events': EventCreate,
+        '/api/login': Login,
     },
     DELETE: {
-        '/transactions': TransactionRemove,
-        '/events': EventRemove,
+        '/api/transactions': TransactionRemove,
+        '/api/events': EventRemove,
     }
 };
 

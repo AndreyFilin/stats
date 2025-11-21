@@ -25,12 +25,9 @@ const Header = () => {
 			</nav>
 			<div className={`header__auth`}>
 				{!profileRes?.isFetched && <Loader className={`header__loader`} />}
-
 				{!!profileRes?.isFetched && (
 					<>
-						<NavLink to={`/profile`}>
-							<div className={`profile__avatar`} />
-						</NavLink>
+						<div className={`profile__avatar`}>{profileData?.login}</div>
 						{profileData?.login}
 						<button onClick={logout}>{`Выйти`}</button>
 					</>

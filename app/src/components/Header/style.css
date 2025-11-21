@@ -6,6 +6,7 @@
     min-height: 80px;
     border-bottom: 1px solid rgba(255, 255, 255, .2);
     padding: 0 var(--padding);
+    user-select: none;
 }
 
 .header__logo {
@@ -50,6 +51,10 @@
     height: 30px;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, .2);
+    font-size: 0;
+    line-height: 30px;
+    text-align: center;
+    overflow: hidden;
 }
 
 .header__loader {

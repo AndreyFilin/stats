@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --only=production
 COPY . .
+COPY ./.env.production ./.env
 RUN npm i && npm run build
 
 FROM nginx:alpine

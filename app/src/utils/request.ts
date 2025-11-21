@@ -23,7 +23,7 @@ const request = async <T, K>(
 	}
 
 	try {
-		const res: Response = await fetch(`${`http://localhost:3000`}${url}`, {
+		const res: Response = await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
 			...options,
 			method,
 			headers: {

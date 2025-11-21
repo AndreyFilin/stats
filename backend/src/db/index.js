@@ -28,6 +28,14 @@ export const handleRequestBody = (req, callback) => {
     });
 };
 
+
+export const handleDbResponse = (res, dbErr, callback) => {
+    if(!handleDBError(res, dbErr)) {
+        res.writeHead(200, { 'Content-Type': `text/json; charset=utf-8;` });
+        callback();
+    }
+}
+
 export const handleAuthorization = (req, res, callback) => {
     const token = req.headers.authorization?.split(' ')[1];
     pool.query(`SELECT token FROM users WHERE token='${token}' AND token_created_at > NOW() - INTERVAL '1 day';`, (dbErr, dbRes) => {
@@ -35,8 +43,8 @@ export const handleAuthorization = (req, res, callback) => {
             if (dbRes.rows?.[0]) {
                 callback(dbRes.rows?.[0]?.token);
             } else {
-                reqRes.writeHead(403, { 'Content-Type': `text/plain; charset=utf-8;` });
-                reqRes.end(`Error unauthorized`);
+                res.writeHead(403, { 'Content-Type': `text/plain; charset=utf-8;` });
+                res.end(`Error unauthorized`);
             }
         }
     });
