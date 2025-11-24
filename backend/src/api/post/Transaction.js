@@ -1,8 +1,11 @@
 import pool, {handleDbResponse, handleRequestBody} from "../../db/index.js";
 
 const Transaction = (req, res, broadcast) => {
-    handleRequestBody(req, () => {
-        pool.query(`INSERT INTO transactions DEFAULT VALUES returning id, created_at;`, (dbErr, dbRes) => {
+    handleRequestBody(req, (payload) => {
+        const {title, value, category} = payload;
+        pool.query(
+            `INSERT INTO transactions (id, created_at, title, value, category) VALUES(DEFAULT, DEFAULT, '${title}', '${value}', '${category}');`,
+            (dbErr, dbRes) => {
             handleDbResponse(res, dbErr, () => {
                 broadcast(JSON.stringify({
                     type: `transaction_create`,

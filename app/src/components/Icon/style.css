@@ -36,6 +36,7 @@
 .icon-file:before {content: var(--icon-icn_web_vendor_filled_file);}
 .icon-arrow_up::before {content: var(--icon-icn_web_vendor_outline_arrow-up);}
 .icon-arrow_down::before {content: var(--icon-icn_web_vendor_outline_arrow-down);}
+.icon-close::before {content: var(--icon-icn_web_vendor_outline_close);}
 
 .icon-outline {
     .icon-menu::before {content: var(--icon-icn_web_vendor_filled_menu);}
@@ -57,4 +58,5 @@
     .icon-file::before {content: var(--icon-icn_web_vendor_outline_file);}
     .icon-arrow_up::before {content: var(--icon-icn_web_vendor_outline_arrow-up);}
     .icon-arrow_down::before {content: var(--icon-icn_web_vendor_outline_arrow-down);}
+    .icon-close::before {content: var(--icon-icn_web_vendor_outline_close);}
 }

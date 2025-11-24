@@ -6,6 +6,9 @@ export interface IProfile {
 export interface ITransaction {
 	id: number;
 	created_at: string;
+	title: string;
+	value: number;
+	category: string;
 }
 
 export interface IEvent {

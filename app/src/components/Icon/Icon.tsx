@@ -21,6 +21,7 @@ export type TIconType =
 	`report` |
 	`file` |
 	`arrow_up` |
+	`close` |
 	`arrow_down`;
 
 export type TIconVariant = `filled` | `outline`;

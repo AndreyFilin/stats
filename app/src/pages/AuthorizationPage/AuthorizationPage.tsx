@@ -5,8 +5,8 @@ import Form from "../../components/Form";
 import FieldText from "../../components/FieldText";
 import Button from "../../components/Button";
 import "./style.css";
+import {AppContext} from "../../AppContext.ts";
 import {login} from "../../api/Api.ts";
-import {AppContext} from "../../App.tsx";
 
 interface ISignInFormValues {
 	email: string;
@@ -14,7 +14,7 @@ interface ISignInFormValues {
 }
 
 const AuthorizationPage = () => {
-	const {setToken} = useContext(AppContext);
+	const {login: handleLogin} = useContext(AppContext);
 
 	const methods = useForm<ISignInFormValues>({
 		defaultValues: {
@@ -30,12 +30,10 @@ const AuthorizationPage = () => {
 	const handleSubmit = useCallback(async (values: ISignInFormValues) => {
 		const {email, password} = values;
 		const loginRes = await login(email, password);
-		const token = loginRes?.data?.token?? null;
-		if (token) {
-			localStorage.setItem(`token`, token);
-			setToken(token);
+		if (loginRes?.data?.token && handleLogin) {
+			handleLogin(loginRes?.data?.token);
 		}
-	}, [setToken]);
+	}, [handleLogin]);
 
 	return (
 		<Page>

@@ -22,10 +22,10 @@ const CalendarPage = () => {
 	return (
 		<Page>
 			<PageTitle>{`Календарь`}</PageTitle>
-			<button
+			<Button
 				onClick={() => eventCreate({})}
 				disabled={eventCreatePending}
-			>{`Добавить`}</button>
+			>{`Добавить`}</Button>
 
 			{!!events.length && (
 				<div className={`entities`}>
@@ -33,8 +33,11 @@ const CalendarPage = () => {
 						<div key={id} className={`entity`}>
 							{id}&mdash;{new Date(created_at).toUTCString()}
 							<Button
+								isIcon={true}
+								icon={`delete`}
 								onClick={() => eventRemove({id})}
 								disabled={eventRemovePending}
+								size={`small`}
 							>{`Удалить`}</Button>
 						</div>
 					))}

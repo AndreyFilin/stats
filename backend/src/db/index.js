@@ -43,7 +43,7 @@ export const handleAuthorization = (req, res, callback) => {
             if (dbRes.rows?.[0]) {
                 callback(dbRes.rows?.[0]?.token);
             } else {
-                res.writeHead(403, { 'Content-Type': `text/plain; charset=utf-8;` });
+                res.writeHead(401, { 'Content-Type': `text/plain; charset=utf-8;` });
                 res.end(`Error unauthorized`);
             }
         }

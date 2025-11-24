@@ -1,19 +1,15 @@
 import {NavLink} from "react-router-dom";
+import Button from "../Button";
 import Loader from "../Loader/Loader.tsx";
 import "./style.css";
 import useGetProfile from "../../queries/useGetProfile.ts";
 import {useContext} from "react";
-import {AppContext} from "../../App.tsx";
+import {AppContext} from "../../AppContext.ts";
 
 const Header = () => {
-	const {setToken} = useContext(AppContext);
+	const {logout} = useContext(AppContext);
 	const profileRes = useGetProfile();
 	const profileData = profileRes.data?.data;
-
-	const logout = () => {
-		localStorage.removeItem(`token`);
-		setToken(null);
-	}
 
 	return (
 		<header className={`header`}>
@@ -29,7 +25,10 @@ const Header = () => {
 					<>
 						<div className={`profile__avatar`}>{profileData?.login}</div>
 						{profileData?.login}
-						<button onClick={logout}>{`Выйти`}</button>
+						<Button
+							onClick={() => logout?.()}
+							size={`small`}
+						>{`Выйти`}</Button>
 					</>
 				)}
 			</div>

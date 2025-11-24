@@ -15,6 +15,9 @@
 
 .page__title {
     margin: 0;
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
 
 .page__loader {
@@ -22,5 +25,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
