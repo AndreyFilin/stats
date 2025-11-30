@@ -48,6 +48,7 @@ const ModalTransactionCreate = (props: IModalProps) => {
 						name={`title`}
 						placeholder={`Название`}
 						required={true}
+						autoFocus={true}
 					/>
 					<FieldText
 						name={`value`}

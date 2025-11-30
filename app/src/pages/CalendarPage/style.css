@@ -1,0 +1,63 @@
+.calendar {
+    width: 100%;
+}
+
+.month {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.month__caption {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    min-height: 60px;
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.month__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.day {
+    display: flex;
+    height: 6vw;
+    min-height: 100px;
+    font-size: max(2vw, 24px);
+    font-weight: 100;
+    padding: 10px 20px;
+    border-top: 1px solid rgba(255, 255, 255, .2);
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .05);
+    }
+}
+
+.day-w2 {
+    grid-column-start: 2;
+}
+
+.day-w3 {
+    grid-column-start: 3;
+}
+
+.day-w4 {
+    grid-column-start: 4;
+}
+
+.day-w5 {
+    grid-column-start: 5;
+}
+
+.day-w6 {
+    grid-column-start: 6;
+}
+
+.day-w0 {
+    grid-column-start: 7;
+}

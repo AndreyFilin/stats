@@ -19,10 +19,10 @@ export const handleDBError = (reqRes, dbErr) => {
 
 export const handleRequestBody = (req, callback) => {
     let body = ``;
-    req.on('data', chunk => {
+    req.on(`data`, (chunk) => {
         body += chunk.toString(); // convert Buffer to string
     });
-    req.on('end', () => {
+    req.on(`end`, () => {
         const payload = JSON.parse(body);
         callback(payload);
     });

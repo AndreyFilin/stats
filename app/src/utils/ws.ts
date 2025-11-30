@@ -1,15 +1,15 @@
-import {queryClient} from "../main.tsx";
+import {queryClient} from "./queryClient.ts";
 
 export default class WSHandler {
 	constructor() {
-		const socket = new WebSocket("ws://localhost:3000");
+		const socket = new WebSocket(`ws://localhost:3000`);
 		socket.onclose = function(event) {
 			if (event.wasClean) {
-				console.log('Соединение закрыто чисто');
+				console.log(`Соединение закрыто чисто`);
 			} else {
-				console.log('Обрыв соединения'); // например, "убит" процесс сервера
+				console.log(`Обрыв соединения`); // например, "убит" процесс сервера
 			}
-			console.log('Код: ' + event.code + ' причина: ' + event.reason);
+			console.log(`Код: ${event.code}причина: ${event.reason}`);
 		};
 		socket.onmessage = this.handleMessages;
 	}

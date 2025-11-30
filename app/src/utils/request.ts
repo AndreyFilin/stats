@@ -1,3 +1,5 @@
+import {onUnauthorizedCallback} from "./authCallbacks.ts";
+
 export interface IResponseData<T> extends Response {
 	data?: T;
 	status: number;
@@ -13,21 +15,13 @@ export class ApiError extends Error {
 	}
 }
 
-// Создаем переменную для хранения функции разлогинивания
-export let onUnauthorizedCallback: (() => void) | null;
-
-// Функция для регистрации колбэка из React-компонента
-export const registerUnauthorizedCallback = (callback: () => void) => {
-	onUnauthorizedCallback = callback;
-};
-
 const request = async <T, K>(
 	url: string,
 	options: RequestInit = {},
 	params?: K
 ): Promise<IResponseData<T>> => {
 	const headers: Record<string, string> = {
-		"Content-Type": `application/json`
+		'Content-Type': `application/json`
 	}
 	if (localStorage.getItem(`token`)) {
 		headers['Authorization'] = `Bearer ${localStorage.getItem(`token`)}`;
@@ -52,13 +46,19 @@ const request = async <T, K>(
 		});
 
 		const status: number = res.status;
+
+		if (status === 401 && onUnauthorizedCallback) {
+			// Вызываем коллбэк при 401 ошибке
+			onUnauthorizedCallback();
+		}
+
 		const data = await res.json();
 		return {data, status} as IResponseData<T>;
 	} catch(error) {
 		if (error instanceof ApiError) {
 			throw error;
 		}
-		throw new ApiError(500, 'Network error', null);
+		throw new ApiError(500, `Network error`, null);
 	}
 }
 
