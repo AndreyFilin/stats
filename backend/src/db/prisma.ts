@@ -10,7 +10,7 @@ const prisma = new PrismaClient({adapter});
 export const handleAuthorization = async (req: IncomingMessage, res: ServerResponse, callback: (token: string) => void) => {
 	const token = req.headers.authorization?.split(' ')?.[1] ?? null;
 	if (!token) {
-		res.writeHead(401, { 'Content-Type': `text/plain; charset=utf-8;` });
+		res.writeHead(401, {'Content-Type': `text/plain; charset=utf-8;`});
 		res.end(`Error unauthorized`);
 	} else {
 		const user = await prisma.users.findFirst({
@@ -25,7 +25,7 @@ export const handleAuthorization = async (req: IncomingMessage, res: ServerRespo
 			}
 		});
 		if (!user?.token) {
-			res.writeHead(401, { 'Content-Type': `text/plain; charset=utf-8;` });
+			res.writeHead(401, {'Content-Type': `text/plain; charset=utf-8;`});
 			res.end(`Error unauthorized`);
 		} else {
 			callback(user.token);
@@ -33,15 +33,15 @@ export const handleAuthorization = async (req: IncomingMessage, res: ServerRespo
 	}
 };
 
-
 export const handleRequestBody = <T>(req:IncomingMessage, callback: (payload: T) => Promise<void>) => {
 	let body = ``;
 	req.on(`data`, (chunk) => {
-		body += chunk.toString(); // convert Buffer to string
+		body += chunk.toString();
 	});
 	req.on(`end`, () => {
 		const payload = !!body ? JSON.parse(body) : {};
-		callback(payload);
+		callback(payload)
+			.catch(console.log);
 	});
 };
 

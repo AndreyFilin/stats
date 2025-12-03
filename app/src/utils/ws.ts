@@ -14,11 +14,13 @@ export default class WSHandler {
 		socket.onmessage = this.handleMessages;
 	}
 
+	/* TODO overhead */
 	private handleMessages = async (event: MessageEvent): Promise<void> => {
-		const {type/*, payload*/} = JSON.parse(event.data);
+		const {type, payload} = JSON.parse(event.data);
 		switch (type) {
 			case `transaction_create`: await this.handleTransactionCreate(); break;
 			case `transaction_remove`: await this.handleTransactionRemove(); break;
+			case `transaction_update`: await this.handleTransactionUpdate(payload?.id); break;
 			case `event_create`: await this.handleEventCreate(); break;
 			case `event_remove`: await this.handleEventRemove(); break;
 		}
@@ -26,6 +28,13 @@ export default class WSHandler {
 
 	private handleTransactionCreate = async () => {
 		await queryClient.invalidateQueries({queryKey: [`transactions`]});
+	}
+
+	private handleTransactionUpdate = async (id?: number) => {
+		await queryClient.invalidateQueries({queryKey: [`transactions`]});
+		if (id) {
+			await queryClient.invalidateQueries({queryKey: [`transaction`, id]});
+		}
 	}
 
 	private handleTransactionRemove = async () => {

@@ -5,4 +5,4 @@
 .DS_Store
 */.env
 */.env.*
-*/src/generated/prisma
+*/src/prisma/generated

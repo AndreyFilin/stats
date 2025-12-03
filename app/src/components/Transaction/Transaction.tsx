@@ -4,6 +4,7 @@ import Button from "../Button";
 import "./style.css";
 import type {ITransaction} from "../../types.ts";
 import useTransactionRemove from "../../mutations/useTransactionRemove.tsx";
+import stringWhiteParse from "../../utils/stringWhiteParse.ts";
 
 interface ITransactionProps extends ITransaction {
 	onUpdate: (id: number) => void
@@ -24,7 +25,7 @@ const Transaction = (props: ITransactionProps) => {
 		)}>
 			<div className={`transaction__logo`} />
 			<div className={`transaction__title`}>{title}</div>
-			<div className={`transaction__value`}>{value}</div>
+			<div className={`transaction__value`}>{stringWhiteParse(value)}</div>
 			<div className={`transaction__actions`}>
 				<Button
 					isIcon={true}

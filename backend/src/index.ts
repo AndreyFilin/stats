@@ -6,7 +6,6 @@ import routes from "./routes";
 
 const hostname: string = process.env.HOST || `127.0.0.1`;
 const port: string = process.env.PORT || `3000`;
-
 const wss = new WebSocketServer({ noServer: true });
 
 const router = findMyWay({
