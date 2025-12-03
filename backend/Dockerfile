@@ -6,4 +6,4 @@ COPY . .
 RUN adduser -D nodeuser
 USER nodeuser
 EXPOSE 3000
-CMD ["node", "src/index.js"]
+CMD ["node", "src/index.ts"]

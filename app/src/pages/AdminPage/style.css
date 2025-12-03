@@ -1,0 +1,6 @@
+.admin__navigation {
+    display: flex;
+    gap: 20px;
+    padding: 0 0 0 ;
+    user-select: none;
+}

@@ -1,17 +1,18 @@
 import {lazy, Suspense, useCallback, useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
+import {useQueryClient} from "@tanstack/react-query";
 import "./utils/db.ts";
 import "./utils/ws.ts";
 import {registerUnauthorizedCallback} from "./utils/authCallbacks.ts";
 import AuthorizationPage from "./pages/AuthorizationPage";
-import {PageLoader} from "./components/Page";
+import {PageError, PageLoader} from "./components/Page";
 import Header from "./components/Header";
 import "./App.css";
 import {AppContext} from "./AppContext.ts";
-import {useQueryClient} from "@tanstack/react-query";
 const BudgetPage = lazy(() => import(`./pages/BudgetPage`));
 const CalendarPage = lazy(() => import(`./pages/CalendarPage`));
 const StatisticsPage = lazy(() => import(`./pages/StatisticsPage`));
+const AdminPage = lazy(() => import(`./pages/AdminPage`));
 
 const App = () => {
 	const [token, setToken] = useState<string | null>(localStorage.getItem(`token`));
@@ -21,7 +22,7 @@ const App = () => {
 		localStorage.removeItem(`token`);
 		queryClient.removeQueries();
 		setToken(null);
-	}, [setToken]);
+	}, [queryClient, setToken]);
 
 	const login = useCallback((token: string) => {
 		localStorage.setItem(`token`, token);
@@ -44,6 +45,8 @@ const App = () => {
 								<Route index element={<BudgetPage/>}/>
 								<Route path={`calendar`} element={<CalendarPage/>}/>
 								<Route path={`statistics`} element={<StatisticsPage/>}/>
+								<Route path={`admin/*`} element={<AdminPage/>}/>
+								<Route path={`*`} element={<PageError>{`404 Not Found`}</PageError>} />
 							</Routes>
 						</Suspense>
 					</>

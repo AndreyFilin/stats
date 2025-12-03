@@ -1,6 +1,7 @@
 export interface IProfile {
 	id: string;
 	login: string;
+	role: string;
 }
 
 export interface ITransaction {
@@ -9,6 +10,12 @@ export interface ITransaction {
 	title: string;
 	value: number;
 	category: string;
+}
+
+export interface ITransactionCategory {
+	id: number;
+	title: string;
+	sys_name: string;
 }
 
 export interface IEvent {

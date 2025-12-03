@@ -1,11 +1,12 @@
 import type {IEvent} from "../../types.ts";
 import classNames from "classnames";
-import Page, {PageTitle} from "../../components/Page";
+import Page, {PageActions, PageCaption, PageTitle} from "../../components/Page";
 import Button from "../../components/Button";
 import "./style.css";
 import useGetEventsList from "../../queries/useGetEventsList.ts";
 import useEventCreate from "../../mutations/useEventCreate.tsx";
 import useEventRemove from "../../mutations/useEventRemove.tsx";
+import {memo} from "react";
 
 interface ICalendarMonthProps {
 	date: Date;
@@ -53,16 +54,18 @@ const CalendarPage = () => {
 
 	return (
 		<Page>
-			<PageTitle>
-				{`Календарь`}
-				<Button
-					isIcon={true}
-					icon={`plus`}
-					size={`small`}
-					onClick={() => eventCreate({})}
-					disabled={eventCreatePending}
-				>{`Добавить`}</Button>
-			</PageTitle>
+			<PageCaption>
+				<PageTitle>{`Календарь`}</PageTitle>
+				<PageActions>
+					<Button
+						isIcon={true}
+						icon={`plus`}
+						size={`small`}
+						onClick={() => eventCreate({})}
+						disabled={eventCreatePending}
+					>{`Добавить`}</Button>
+				</PageActions>
+			</PageCaption>
 
 			<div className={`calendar`}>
 				<CalendarMonth date={new Date()}/>
@@ -91,4 +94,4 @@ const CalendarPage = () => {
 	);
 };
 
-export default CalendarPage;
+export default memo(CalendarPage);

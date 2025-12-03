@@ -5,7 +5,7 @@ import "./style.css";
 interface IFiledProps {
 	className?: string;
 	children?: ReactNode;
-	name?: string;
+	name: string;
 	label?: string | ReactNode;
 	error?: string;
 }

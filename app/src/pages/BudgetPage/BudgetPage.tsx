@@ -1,47 +1,40 @@
-import {useState} from "react";
-import type {ITransaction} from "../../types.ts";
-import Page, {PageTitle} from "../../components/Page";
+import {memo, useState} from "react";
+import {type ITransaction} from "../../types.ts";
+import Page, {PageActions, PageCaption, PageTitle} from "../../components/Page";
 import Button from "../../components/Button";
+import Transaction from "../../components/Transaction/Transaction.tsx";
 import ModalTransactionCreate from "../../components/ModalTransactionCreate";
+import ModalTransactionUpdate from "../../components/ModalTransactionUpdate";
 import useGetTransactionsList from "../../queries/useGetTransactionsList.ts";
-import useTransactionRemove from "../../mutations/useTransactionRemove.tsx";
 
 const BudgetPage = () => {
 	const [isCreateModalOpen, setCreateModalOpen] = useState<boolean>(false);
-
+	const [transactionEditPointer, setTransactionEditPointer] = useState<number | null>(null);
 	const transactionsRes = useGetTransactionsList();
 	const transactions: ITransaction[] = transactionsRes.data?.data ?? [];
 
-	const {
-		mutate: transactionRemove,
-		isPending: transactionRemovePending
-	} = useTransactionRemove();
-
 	return (
 		<Page>
-			<PageTitle>
-				{`Бюджет`}
-				<Button
-					isIcon={true}
-					icon={`plus`}
-					size={`small`}
-					onClick={() => setCreateModalOpen(true)}
-				>{`Добавить`}</Button>
-			</PageTitle>
+			<PageCaption>
+				<PageTitle>{`Бюджет`}</PageTitle>
+				<PageActions>
+					<Button
+						isIcon={true}
+						icon={`plus`}
+						size={`small`}
+						onClick={() => setCreateModalOpen(true)}
+					>{`Добавить`}</Button>
+				</PageActions>
+			</PageCaption>
 
 			{!!transactions.length && (
 				<div className={`entities`}>
-					{transactions?.map(({id, title}) => (
-						<div key={id} className={`entity`}>
-							{id}&mdash;{title}
-							<Button
-								isIcon={true}
-								icon={`delete`}
-								onClick={() => transactionRemove({id})}
-								disabled={transactionRemovePending}
-								size={`small`}
-							>{`Удалить`}</Button>
-						</div>
+					{transactions?.map((transaction) => (
+						<Transaction
+							key={transaction.id}
+							{...transaction}
+							onUpdate={setTransactionEditPointer}
+						/>
 					))}
 				</div>
 			)}
@@ -51,8 +44,15 @@ const BudgetPage = () => {
 					close={() => setCreateModalOpen(false)}
 				/>
 			)}
+
+			{!!transactionEditPointer && (
+				<ModalTransactionUpdate
+					transactionId={transactionEditPointer}
+					close={() => setTransactionEditPointer(null)}
+				/>
+			)}
 		</Page>
 	);
 };
 
-export default BudgetPage;
+export default memo(BudgetPage);

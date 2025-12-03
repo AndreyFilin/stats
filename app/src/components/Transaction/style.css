@@ -1,0 +1,52 @@
+.transaction {
+    width: auto;
+    display: grid;
+    grid-template-columns: 40px 1fr auto auto;
+    gap: 24px;
+    padding: 16px 16px;
+    margin: 0 -16px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.1s;
+    font-size: 24px;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, .1);
+    }
+}
+
+.transaction-income .transaction__value {
+    color: rgba(0, 125, 0, 0.8);
+}
+
+.transaction-outcome .transaction__value {
+    color: rgba(200, 0, 0, 0.8);
+}
+
+.transaction__logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, .2);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2);
+    overflow: hidden;
+}
+
+.transaction__title {
+    display: flex;
+    align-items: center;
+}
+
+.transaction__value {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.transaction__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

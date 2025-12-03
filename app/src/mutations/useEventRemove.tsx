@@ -5,7 +5,7 @@ const useEventRemove = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: eventRemove,
-		mutationKey: [`transaction_remove`],
+		mutationKey: [`event_remove`],
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({queryKey: [`events`]});
 		}

@@ -1,10 +1,12 @@
 import {type HTMLAttributes, memo} from "react";
+import classNames from "classnames";
 import RelativePortal from "../RelativePortal/RelativePortal.tsx";
 import Button from "../Button";
 import "./style.css";
 
 export interface IModalProps extends HTMLAttributes<HTMLDivElement> {
 	title?: string;
+	isFetching?: boolean;
 	close: () => void;
 }
 
@@ -16,7 +18,7 @@ const Modal = (props: IModalProps) => {
 				onMouseDown={props.close}
 			>
 				<div
-					className={`modal`}
+					className={classNames(`modal`, {'modal-fetching': props.isFetching})}
 					onMouseDown={ev => ev.stopPropagation()}
 				>
 					<div className={`modal__caption`}>

@@ -3,6 +3,7 @@ import {Controller, useFormContext} from "react-hook-form";
 import Field from "../Field/Field";
 
 export interface IFieldTextProps extends InputHTMLAttributes<HTMLInputElement> {
+	name: string;
 	label?: string;
 	rules?: any;
 }

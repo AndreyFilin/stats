@@ -4,9 +4,11 @@ import Modal, {ModalActions, type IModalProps} from "../Modal";
 import Button from "../Button";
 import Form from "../Form";
 import FieldText from "../FieldText";
+import FieldCombobox from "../FieldCombobox";
 import useTransactionCreate from "../../mutations/useTransactionCreate.tsx";
+import useGetTransactionCategoriesList from "../../queries/useGetTransactionGategoriesList.ts";
 
-interface ICreateTransactionFormValues {
+interface ITransactionCreateFormValues {
 	title: string;
 	value: number;
 	category: string;
@@ -15,16 +17,23 @@ interface ICreateTransactionFormValues {
 const ModalTransactionCreate = (props: IModalProps) => {
 	const {close} = props;
 
+	const transactionCategoriesRes = useGetTransactionCategoriesList();
+	const transactionCategories = transactionCategoriesRes?.data?.data;
+	const categoriesOptions = transactionCategories?.map((category) => ({
+		title: category.title,
+		value: category.sys_name,
+	}));
+
 	const {
 		mutate: transactionCreate,
 		isPending: transactionCreatePending
 	} = useTransactionCreate();
 
-	const methods = useForm<ICreateTransactionFormValues>({
+	const methods = useForm<ITransactionCreateFormValues>({
 		defaultValues: {
 			title: ``,
 			value: 0,
-			category: `00000000-0000-0000-0000-000000000000`,
+			category: ``,
 		},
 		resetOptions: {
 			keepDirtyValues: true,
@@ -32,7 +41,7 @@ const ModalTransactionCreate = (props: IModalProps) => {
 		}
 	});
 
-	const handleSubmit = useCallback((values: ICreateTransactionFormValues) => {
+	const handleSubmit = useCallback((values: ITransactionCreateFormValues) => {
 		transactionCreate(values);
 		close();
 	}, [transactionCreate, close]);
@@ -50,6 +59,12 @@ const ModalTransactionCreate = (props: IModalProps) => {
 						required={true}
 						autoFocus={true}
 					/>
+					<FieldCombobox
+						name={`category`}
+						placeholder={`Категория`}
+						required={true}
+						options={categoriesOptions}
+					/>
 					<FieldText
 						name={`value`}
 						placeholder={`Сумма`}
@@ -64,7 +79,7 @@ const ModalTransactionCreate = (props: IModalProps) => {
 							type={`button`}
 							kind={`secondary`}
 							onClick={close}
-						>{`Закрыть`}</Button>
+						>{`Отменить`}</Button>
 					</ModalActions>
 				</Form>
 			</FormProvider>

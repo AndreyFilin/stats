@@ -1,8 +1,7 @@
 .page {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    align-items: start;
+    gap: 36px;
     padding: var(--padding);
     /*
     animation: fadeOut 0.1s linear forwards;
@@ -10,7 +9,15 @@
     */
     height: calc(100dvh - 80px);
     overflow-y: auto;
-    scrollbar-gutter: stable;
+    /*scrollbar-gutter: stable;*/
+}
+
+.page__caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
 }
 
 .page__title {
@@ -20,9 +27,21 @@
     align-items: center;
 }
 
+.page__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page__error,
 .page__loader {
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.page__error {
+    font-size: 24px;
 }
