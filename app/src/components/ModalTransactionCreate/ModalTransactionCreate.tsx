@@ -5,14 +5,9 @@ import Button from "../Button";
 import Form from "../Form";
 import FieldText from "../FieldText";
 import FieldCombobox from "../FieldCombobox";
-import useTransactionCreate from "../../mutations/useTransactionCreate.tsx";
-import useGetTransactionCategoriesList from "../../queries/useGetTransactionGategoriesList.ts";
-
-interface ITransactionCreateFormValues {
-	title: string;
-	value: number;
-	category: string;
-}
+import useTransactionCreate from "../../mutations/useTransactionCreate";
+import useGetTransactionCategoriesList from "../../queries/useGetTransactionGategoriesList";
+import type {ITransactionCreate} from "../../../../apiInterface";
 
 const ModalTransactionCreate = (props: IModalProps) => {
 	const {close} = props;
@@ -29,7 +24,7 @@ const ModalTransactionCreate = (props: IModalProps) => {
 		isPending: transactionCreatePending
 	} = useTransactionCreate();
 
-	const methods = useForm<ITransactionCreateFormValues>({
+	const methods = useForm<ITransactionCreate>({
 		defaultValues: {
 			title: ``,
 			value: 0,
@@ -41,14 +36,14 @@ const ModalTransactionCreate = (props: IModalProps) => {
 		}
 	});
 
-	const handleSubmit = useCallback((values: ITransactionCreateFormValues) => {
+	const handleSubmit = useCallback((values: ITransactionCreate) => {
 		transactionCreate(values);
 		close();
 	}, [transactionCreate, close]);
 
 	return (
 		<Modal
-			title={`Создать запись`}
+			title={`Создать транзакцию`}
 			close={close}
 		>
 			<FormProvider {...methods}>

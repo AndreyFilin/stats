@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
-import {fetchTransactionCategoriesList} from "../api/Api.ts";
-import type {IResponseData} from "../utils/request.ts";
-import type {ITransactionCategory} from "../types.ts";
+import {fetchTransactionCategoriesList} from "../api/Api";
+import type {IResponseData} from "../utils/request";
+import type {ITransactionCategory} from "../types";
 
 const useGetTransactionCategoriesList = () => {
 	return useQuery<IResponseData<ITransactionCategory[]>>({

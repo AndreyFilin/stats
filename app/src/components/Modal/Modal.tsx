@@ -1,6 +1,6 @@
 import {type HTMLAttributes, memo} from "react";
 import classNames from "classnames";
-import RelativePortal from "../RelativePortal/RelativePortal.tsx";
+import RelativePortal from "../RelativePortal/RelativePortal";
 import Button from "../Button";
 import "./style.css";
 

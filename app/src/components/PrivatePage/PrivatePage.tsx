@@ -1,6 +1,6 @@
 import {memo, type ReactNode} from "react";
 import Page, {PageError} from "../Page";
-import useGetProfile from "../../queries/useGetProfile.ts";
+import useGetProfile from "../../queries/useGetProfile";
 
 interface IPrivatePageProps {
 	allowed: string[];
@@ -25,7 +25,7 @@ const PrivatePage = (props: IPrivatePageProps) => {
 		<Page>{children}</Page>
 	);
 };
-
+/*
 const areArraysEqual = (arr1: unknown[], arr2: unknown[]) => {
 	if (arr1.length !== arr2.length) {
 		return false;
@@ -36,6 +36,6 @@ const areArraysEqual = (arr1: unknown[], arr2: unknown[]) => {
 		}
 	}
 	return true;
-};
+};*/
 
-export default memo(PrivatePage, ({allowed}, {allowed: nextAllowed}) => areArraysEqual(allowed, nextAllowed));
+export default memo(PrivatePage /*, ({allowed}, {allowed: nextAllowed}) => areArraysEqual(allowed, nextAllowed)*/);

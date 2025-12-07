@@ -1,0 +1,2 @@
+import ModalTransactionCategoryCreate from "./ModalTransactionCategoryCreate";
+export default ModalTransactionCategoryCreate;

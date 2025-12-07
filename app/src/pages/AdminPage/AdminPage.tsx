@@ -1,21 +1,17 @@
-import Link from "../../components/Link";
-import PrivatePage from "../../components/PrivatePage";
-import "./style.css";
+import {lazy, memo} from "react";
 import {Route, Routes} from "react-router-dom";
+import {PageError} from "../../components/Page";
+const TransactionCategoriesPage = lazy(() => import(`../TransactionCategoriesPage`));
+const UsersPage = lazy(() => import(`../UsersPage`));
 
 const AdminPage = () => {
 	return (
-		<PrivatePage allowed={[`admin`]}>
-			<nav className={`admin__navigation`}>
-				<Link to={`/admin`} end={true}>{`Категории`}</Link>
-				<Link to={`/admin/users`}>{`Пользователи`}</Link>
-			</nav>
-			<Routes>
-				<Route path={``} element={<>{`1`}</>}/>
-				<Route path={`users`} element={<>{`2`}</>}/>
-			</Routes>
-		</PrivatePage>
+		<Routes>
+			<Route path={``} element={<TransactionCategoriesPage />}/>
+			<Route path={`users`} element={<UsersPage />}/>
+			<Route path={`*`} element={<PageError>{`404 Not Found`}</PageError>} />
+		</Routes>
 	);
 }
 
-export default AdminPage;
+export default memo(AdminPage);

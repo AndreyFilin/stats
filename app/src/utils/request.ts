@@ -1,4 +1,4 @@
-import {onUnauthorizedCallback} from "./authCallbacks.ts";
+import {onUnauthorizedCallback, triggerUnauthorizedCallback} from "./authCallbacks";
 
 export interface IResponseData<T> extends Response {
 	data?: T;
@@ -15,7 +15,7 @@ export class ApiError extends Error {
 	}
 }
 
-const request = async <T, K>(
+const request = async <T = void, K = void>(
 	url: string,
 	options: RequestInit = {},
 	params?: K
@@ -48,8 +48,7 @@ const request = async <T, K>(
 		const status: number = res.status;
 
 		if (status === 401 && onUnauthorizedCallback) {
-			// Вызываем коллбэк при 401 ошибке
-			onUnauthorizedCallback();
+			triggerUnauthorizedCallback();
 		}
 
 		const data = await res.json();

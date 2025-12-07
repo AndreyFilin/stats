@@ -1,2 +1,2 @@
-import ModalTransactionUpdate from './ModalTransactionUpdate.tsx';
+import ModalTransactionUpdate from "./ModalTransactionUpdate";
 export default ModalTransactionUpdate;

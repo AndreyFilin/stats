@@ -10,7 +10,7 @@ const wss = new WebSocketServer({ noServer: true });
 
 const router = findMyWay({
     defaultRoute: (_, res) => {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
+        res.writeHead(404, {'Content-Type': `text/plain`});
         res.end(`404 Not Found`);
     }
 });

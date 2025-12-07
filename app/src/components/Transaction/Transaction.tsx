@@ -2,9 +2,9 @@ import {memo} from "react";
 import classNames from "classnames";
 import Button from "../Button";
 import "./style.css";
-import type {ITransaction} from "../../types.ts";
-import useTransactionRemove from "../../mutations/useTransactionRemove.tsx";
-import stringWhiteParse from "../../utils/stringWhiteParse.ts";
+import type {ITransaction} from "../../types";
+import useTransactionRemove from "../../mutations/useTransactionRemove";
+import stringWhiteParse from "../../utils/stringWhiteParse";
 
 interface ITransactionProps extends ITransaction {
 	onUpdate: (id: number) => void

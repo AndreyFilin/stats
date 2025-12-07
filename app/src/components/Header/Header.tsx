@@ -3,8 +3,8 @@ import Link from "../Link";
 import Button from "../Button";
 import Loader from "../Loader";
 import "./style.css";
-import useGetProfile from "../../queries/useGetProfile.ts";
-import {AppContext} from "../../AppContext.ts";
+import useGetProfile from "../../queries/useGetProfile";
+import {AppContext} from "../../AppContext";
 
 const Header = () => {
 	const {logout} = useContext(AppContext);

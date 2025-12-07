@@ -1,4 +1,4 @@
-{
+/*{
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
@@ -7,7 +7,7 @@
     "module": "ESNext",
     "types": ["vite/client"],
 
-    /* Bundler mode */
+    / * Bundler mode * /
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
@@ -15,7 +15,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
+    / * Linting * /
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -27,6 +27,21 @@
     "skipLibCheck": true
   },
   "include": [
-    "app/src"
+    "src"
   ]
+}*/
+
+{
+  "extends": "../tsconfig.base.json", // Наследуем базовый файл
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Добавляем типы браузера
+    "module": "ESNext", // Фронтенд обычно использует ES-модули для бандлера
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+  },
+  "include": ["src"] // Компилируем только файлы в папке src
 }

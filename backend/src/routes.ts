@@ -3,6 +3,7 @@ import Index from "./api/get/Index";
 import Profile from "./api/get/Profile";
 import Login from "./api/post/Login";
 import TransactionCategoriesList from "./api/get/TransactionCategories";
+import TransactionCategoryCreate from "./api/post/TransactionCategory";
 import TransactionsList from "./api/get/Transactions";
 import Transaction from "./api/get/Transaction";
 import TransactionCreate from "./api/post/Transaction";
@@ -25,6 +26,7 @@ const routes = {
 	},
 	POST: {
 		'/api/login': Login,
+		'/api/transaction_category': TransactionCategoryCreate,
 		'/api/transaction': TransactionCreate,
 		'/api/event': EventCreate,
 	},

@@ -5,8 +5,8 @@ import Form from "../../components/Form";
 import FieldText from "../../components/FieldText";
 import Button from "../../components/Button";
 import "./style.css";
-import {AppContext} from "../../AppContext.ts";
-import {login} from "../../api/Api.ts";
+import {AppContext} from "../../AppContext";
+import {login} from "../../api/Api";
 
 interface ISignInFormValues {
 	email: string;

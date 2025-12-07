@@ -1,11 +1,11 @@
-import type {IEvent} from "../../types.ts";
+import type {IEvent} from "../../types";
 import classNames from "classnames";
 import Page, {PageActions, PageCaption, PageTitle} from "../../components/Page";
 import Button from "../../components/Button";
 import "./style.css";
-import useGetEventsList from "../../queries/useGetEventsList.ts";
-import useEventCreate from "../../mutations/useEventCreate.tsx";
-import useEventRemove from "../../mutations/useEventRemove.tsx";
+import useGetEventsList from "../../queries/useGetEventsList";
+import useEventCreate from "../../mutations/useEventCreate";
+import useEventRemove from "../../mutations/useEventRemove";
 import {memo} from "react";
 
 interface ICalendarMonthProps {
@@ -61,7 +61,7 @@ const CalendarPage = () => {
 						isIcon={true}
 						icon={`plus`}
 						size={`small`}
-						onClick={() => eventCreate({})}
+						onClick={() => eventCreate({title: ``})}
 						disabled={eventCreatePending}
 					>{`Добавить`}</Button>
 				</PageActions>

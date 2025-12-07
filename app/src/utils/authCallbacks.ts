@@ -4,8 +4,6 @@ export const registerUnauthorizedCallback = (callback: () => void) => {
 	onUnauthorizedCallback = callback;
 };
 
-export const triggerUnauthorized = () => {
-	if (typeof onUnauthorizedCallback === 'function') {
-		onUnauthorizedCallback();
-	}
+export const triggerUnauthorizedCallback = () => {
+	onUnauthorizedCallback?.();
 };

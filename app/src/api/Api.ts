@@ -1,19 +1,9 @@
-import request from "../utils/request.ts";
-import type {IEvent, IProfile, ITransaction, ITransactionCategory} from "../types.ts";
+import request from "../utils/request";
+import type {IEvent, IProfile, ITransaction, ITransactionCategory} from "../types";
+import type {ITransactionCategoryCreate, ITransactionCreate, ITransactionUpdate} from "../../../apiInterface";
 
 export interface ILoginResponse extends Response {
 	token: string;
-}
-
-export interface ITransactionCreateFormValues {
-	title: string;
-}
-
-export interface ITransactionUpdateValues {
-	id: number;
-	title: string;
-	value: number;
-	category: string;
 }
 
 export interface ITransactionRemoveFormValues {
@@ -33,28 +23,33 @@ export const login = async (login: string, password: string) => {
 };
 
 export const fetchProfile = async () => {
-	return await request<IProfile, undefined>(`/profile`);
+	return await request<IProfile>(`/profile`);
 };
 
 export const fetchTransactionCategoriesList = async () => {
-	return await request<ITransactionCategory[], undefined>(`/transaction_categories`);
+	return await request<ITransactionCategory[]>(`/transaction_categories`);
 };
 
+export const transactionCategoryCreate = async (values: ITransactionCategoryCreate) => {
+	return await request<Response, ITransactionCategoryCreate>(`/transaction_category`, {method: `POST`}, values);
+};
+
+/* TODO разобраться с T */
 export const fetchTransactionsList = async () => {
-	return await request<ITransaction[], undefined>(`/transactions`);
+	return await request<ITransaction[]>(`/transactions`);
 };
-
+/* TODO разобраться с T */
 export const fetchTransaction = async (id: number) => {
-	return await request<ITransaction, undefined>(`/transaction/${id}`);
+	return await request<ITransaction>(`/transaction/${id}`);
 };
 
-export const transactionCreate = async (values: ITransactionCreateFormValues) => {
-	return await request<Response, ITransactionCreateFormValues>(`/transaction`, {method: `POST`}, values);
+export const transactionCreate = async (values: ITransactionCreate) => {
+	return await request<Response, ITransactionCreate>(`/transaction`, {method: `POST`}, values);
 };
 
-export const transactionUpdate = async (values: ITransactionUpdateValues) => {
+export const transactionUpdate = async (values: ITransactionUpdate) => {
 	const {id} = values;
-	return await request<Response, ITransactionUpdateValues>(`/transaction/${id}`, {method: `PUT`}, values);
+	return await request<Response, ITransactionUpdate>(`/transaction/${id}`, {method: `PUT`}, values);
 };
 
 export const transactionRemove = async (id: number) => {
@@ -62,7 +57,7 @@ export const transactionRemove = async (id: number) => {
 };
 
 export const fetchEventsList = async () => {
-	return await request<IEvent[], undefined>(`/events`);
+	return await request<IEvent[]>(`/events`);
 };
 
 export const eventCreate = async (values: IEventCreateFormValues) => {

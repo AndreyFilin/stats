@@ -5,10 +5,10 @@ import Button from "../Button";
 import Form from "../Form";
 import FieldText from "../FieldText";
 import FieldCombobox from "../FieldCombobox";
-import useTransactionUpdate from "../../mutations/useTransactionUpdate.tsx";
-import useGetTransactionCategoriesList from "../../queries/useGetTransactionGategoriesList.ts";
-import useGetTransaction from "../../queries/useGetTransaction.ts";
-import type {ITransactionUpdateValues} from "../../api/Api.ts";
+import useTransactionUpdate from "../../mutations/useTransactionUpdate";
+import useGetTransactionCategoriesList from "../../queries/useGetTransactionGategoriesList";
+import useGetTransaction from "../../queries/useGetTransaction";
+import type {ITransactionUpdate} from "../../../../apiInterface";
 
 interface IModalTransactionUpdateProps extends IModalProps {
 	transactionId: number;
@@ -31,7 +31,7 @@ const ModalTransactionUpdate = (props: IModalTransactionUpdateProps) => {
 		isPending: transactionUpdatePending
 	} = useTransactionUpdate();
 
-	const methods = useForm<ITransactionUpdateValues>({
+	const methods = useForm<ITransactionUpdate>({
 		defaultValues: {
 			title: ``,
 			value: 0,
@@ -49,7 +49,7 @@ const ModalTransactionUpdate = (props: IModalTransactionUpdateProps) => {
 		}
 	}, [methods, transactionData, transactionRes.isFetched]);
 
-	const handleSubmit = useCallback((values: ITransactionUpdateValues) => {
+	const handleSubmit = useCallback((values: ITransactionUpdate) => {
 		transactionUpdate(values);
 		close();
 	}, [transactionUpdate, close]);

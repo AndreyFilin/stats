@@ -1,4 +1,4 @@
-import {queryClient} from "./queryClient.ts";
+import {queryClient} from "./queryClient";
 
 export default class WSHandler {
 	constructor() {
