@@ -2,6 +2,7 @@ import {type IEndpoint} from "./types";
 import Index from "./api/get/Index";
 import Profile from "./api/get/Profile";
 import Login from "./api/post/Login";
+import Refresh from "./api/post/Refresh";
 import TransactionCategoriesList from "./api/get/TransactionCategories";
 import TransactionCategoryCreate from "./api/post/TransactionCategory";
 import TransactionsList from "./api/get/Transactions";
@@ -17,25 +18,26 @@ type UsedHTTPMethods = `GET` | `POST` | `PUT` | `DELETE`;
 
 const routes = {
 	GET: {
-		'/api': Index,
-		'/api/profile': Profile,
-		'/api/transaction_categories': TransactionCategoriesList,
-		'/api/transactions': TransactionsList,
-		'/api/transaction/:id': Transaction,
-		'/api/events': EventsList,
+		'': Index,
+		'/profile': Profile,
+		'/transaction_categories': TransactionCategoriesList,
+		'/transactions': TransactionsList,
+		'/transaction/:id': Transaction,
+		'/events': EventsList,
 	},
 	POST: {
-		'/api/login': Login,
-		'/api/transaction_category': TransactionCategoryCreate,
-		'/api/transaction': TransactionCreate,
-		'/api/event': EventCreate,
+		'/login': Login,
+		'/refresh': Refresh,
+		'/transaction_category': TransactionCategoryCreate,
+		'/transaction': TransactionCreate,
+		'/event': EventCreate,
 	},
 	PUT: {
-		'/api/transaction/:id': TransactionUpdate,
+		'/transaction/:id': TransactionUpdate,
 	},
 	DELETE: {
-		'/api/transaction/:id': TransactionRemove,
-		'/api/event': EventRemove,
+		'/transaction/:id': TransactionRemove,
+		'/event': EventRemove,
 	}
 } as const satisfies Record<UsedHTTPMethods, Record<string, IEndpoint>>;
 

@@ -1,5 +1,5 @@
 import {type InputHTMLAttributes, memo, type SyntheticEvent, useCallback, useEffect, useRef, useState} from "react";
-import {Controller, useFormContext} from "react-hook-form";
+import {Controller, type RegisterOptions, useFormContext} from "react-hook-form";
 import classNames from "classnames";
 import Field from "../Field/Field";
 import "./style.css";
@@ -12,7 +12,7 @@ export interface IComboboxItemProps {
 export interface IFieldComboboxProps extends InputHTMLAttributes<HTMLInputElement> {
 	name: string;
 	label?: string;
-	rules?: any;
+	rules?: RegisterOptions;
 	options?: IComboboxItemProps[];
 }
 

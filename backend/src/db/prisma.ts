@@ -2,34 +2,31 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../../prisma/generated/client";
 import {IncomingMessage, ServerResponse} from "node:http";
+import jwt from "jsonwebtoken";
+
 const connectionString = `${process.env.DATABASE_URL}`;
 
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({adapter});
 
 export const handleAuthorization = async (req: IncomingMessage, res: ServerResponse, callback: (token: string) => void) => {
-	const token = req.headers.authorization?.split(' ')?.[1] ?? null;
-	if (!token) {
+	const token = req.headers.authorization?.split(' ')?.[1];
+
+	const handleError = (err?: string) => {
 		res.writeHead(401, {'Content-Type': `text/plain; charset=utf-8;`});
-		res.end(`Error unauthorized`);
+		res.end(err ?? `Unauthorized`);
+	}
+
+	if (!token) {
+		handleError();
 	} else {
-		const user = await prisma.users.findFirst({
-			select: {
-				token: true
-			},
-			where: {
-				token,
-				token_created_at: {
-					gt: new Date(new Date().setDate(new Date().getDate() - 1))
-				}
+		jwt.verify(token, process.env.JWT_ACCESS_SECRET!, (err) => {
+			if (err) {
+				handleError(err.message);
+			} else {
+				callback?.(token);
 			}
 		});
-		if (!user?.token) {
-			res.writeHead(401, {'Content-Type': `text/plain; charset=utf-8;`});
-			res.end(`Error unauthorized`);
-		} else {
-			callback(user.token);
-		}
 	}
 };
 

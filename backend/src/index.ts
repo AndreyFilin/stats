@@ -17,16 +17,20 @@ const router = findMyWay({
 
 Object.entries(routes).forEach(([method, endpoints]) => {
     Object.entries(endpoints).forEach(([path, handler]) => {
-        router.on(method as HTTPMethod, path, async (req, res, params) => {
+        router.on(method as HTTPMethod, `/api${path}`, async (req, res, params) => {
             await handler?.(req, res, params);
         });
     });
 });
 
 const server = createServer((req, res) => {
-    res.setHeader(`Access-Control-Allow-Origin`, `*`);
+	const origin = req.headers.origin;
+	if (origin) {
+		res.setHeader('Access-Control-Allow-Origin', origin);
+	}
     res.setHeader(`Access-Control-Allow-Methods`, `GET, POST, PUT, DELETE, OPTIONS`);
-    res.setHeader(`Access-Control-Allow-Headers`, `*`);
+    res.setHeader(`Access-Control-Allow-Headers`, `Content-Type, Authorization`);
+	res.setHeader(`Access-Control-Allow-Credentials`, `true`);
     res.setHeader(`Access-Control-Max-Age`, 86400);
     if (req.method === `OPTIONS`) {
         res.writeHead(204);
@@ -45,5 +49,5 @@ server.on(`upgrade`, (request, socket, head) => {
 
 // @ts-ignore Something strange
 server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`Server running at https://${hostname}:${port}/`);
 });

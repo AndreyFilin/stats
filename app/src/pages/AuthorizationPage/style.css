@@ -1,4 +1,16 @@
+.authorization__page {
+    flex: 1;
+    padding: var(--padding);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .authorization__form {
-    margin: auto;
-    max-width: 500px;
+    flex: 1;
+    max-width: 240px;
+
+    & > button {
+        margin-top: 16px;
+    }
 }

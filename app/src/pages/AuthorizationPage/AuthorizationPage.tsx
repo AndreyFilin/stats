@@ -1,6 +1,5 @@
 import {useCallback, useContext} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import Page from "../../components/Page";
 import Form from "../../components/Form";
 import FieldText from "../../components/FieldText";
 import Button from "../../components/Button";
@@ -36,7 +35,7 @@ const AuthorizationPage = () => {
 	}, [handleLogin]);
 
 	return (
-		<Page>
+		<div className={`authorization__page`}>
 			<FormProvider {...methods}>
 				<Form
 					className={`authorization__form`}
@@ -66,7 +65,7 @@ const AuthorizationPage = () => {
 					<Button isFetching={methods.formState.isSubmitting}>{`Войти`}</Button>
 				</Form>
 			</FormProvider>
-		</Page>
+		</div>
 	);
 }
 
